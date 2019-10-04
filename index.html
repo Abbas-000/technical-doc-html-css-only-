@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Technical Documentation</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <nav id="navbar">
+          <header style="text-align: center;">
+            <h1>React.js Main Concepts Documentation</h1>
+          </header>
+          <ul type="none">
+            <a href="#Introduction_to_React" class="nav-link">
+              <li>Introduction to React</li>
+            </a>
+            <a href="#How_to_install_React" class="nav-link">
+              <li>How to install React</li>
+            </a>
+            <a href="#JSX" class="nav-link">
+              <li>JSX</li>
+            </a>
+            <a href="#Components" class="nav-link">
+              <li>Components</li>
+            </a>
+            <a href="#State" class="nav-link">
+              <li>State</li>
+            </a>
+            <a href="#Props" class="nav-link">
+              <li>Props</li>
+            </a>
+            <a href="#Lifecycle_Events" class="nav-link">
+              <li>Lifecycle Events</li>
+            </a>
+            <a href="#Handling_Forms" class="nav-link">
+              <li>Handling Forms</li>
+            </a>
+          </ul>
+        </nav>
+      </aside>
+
+      <main id="main-doc">
+        <section class="main-section" id="Introduction_to_React">
+          <header>
+            <h2>Introduction to React</h2>
+          </header>
+          <p>React is a JavaScript library that aims to simplify development of visual interfaces.</p>
+          <p>Developed at Facebook and released to the world in 2013, it drives some of the most widely used apps, powering Facebook and Instagram among countless other applications</p>
+          <p>Its primary goal is to make it easy to reason about an interface and its state at any point in time, by dividing the UI into a collection of components.</p>
+          <p><strong>Note:</strong> In order to learn the React.js liabrary there are a few things that you should already be familiar with.</p>
+          <ul>
+            <li>Basic understanding of HTML</li>
+            <li>Basic understanding of CSS</li>
+            <li>Basic understanding of javascript</li>
+          </ul>
+        </section>
+        <section class="main-section" id="How_to_install_React">
+          <header>
+            <h2>How to install React</h2>
+          </header>
+          <p>There are various ways to setup React so that it can be used on your app or site.</p>
+          <h3>Load React directly in the web page</h3>
+          <pre><code>
+          &lt;html&gt;
+            ...
+              &lt;body&gt;
+                ...
+                &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.7.0-alpha.2/umd/react.development.js" crossorigin&gt;&lt;/script&gt;
+                &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.7.0-alpha.2/umd/react-dom.production.min.js" crossorigin&gt;&lt;/script&gt;
+              &lt;/body&gt;
+          &lt;/html&gt;
+          </code></pre>
+          <p>Here we loaded both React and React DOM. Why 2 libraries? Because React is 100% independent from the browser and can be used outside it (for example on Mobile devices with React Native). Hence the need for React DOM, to add the wrappers for the
+            browser
+          </p>
+          <p>After those tags you can load your JavaScript files that use React, or even inline JavaScript in a <code>&lt;script&gt;</code> tag:</p>
+          <pre><code>
+          &lt;script	src="app.js"&gt;&lt;/script&gt;
+          &lt;!--	or	--&gt;
+          &lt;script&gt;
+            //my	app
+          &lt;/script&gt;
+          </code></pre>
+          <p>To use JSX you need an extra step: load Babel</p>
+          <pre><code>
+          &lt;script	src="https://unpkg.com/babel-standalone@6/babel.min.js">&lt;/script&gt;
+          </code></pre>
+          <p>and load your scripts with the special text/babel MIME type:</p>
+          <pre><code>
+          &lt;script	src="app.js"	type="text/babel"&gt;&lt;/script&gt;
+          </code></pre>
+          <p>Now you can add JSX in your app.js file:</p>
+          <pre><code>
+          <var>const</var>	Button	=	()	=>	{
+            return	&lt;button&gt;Click	me!&lt;/button&gt;
+          ReactDOM.render(&lt;Button	/&gt;,	document.getElementById('root'))
+          </code></pre>
+          <p>Starting in this way with script tags is good for building prototypes and enables a quick start without having to set up a complex workflow.</p>
+          <h3>Use create-react-app</h3>
+          <p>create-react-app is a project aimed at getting you up to speed with React in no time, and any React app that needs to outgrow a single page will find that <code>create-react-app</code> meets that need.</p>
+          <p>You start by using npx , which is an easy way to download and execute Node.js commands without installing them. npx comes with npm (since version 5.2) and if you don't have npm installed already, do it now from <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>        (npm is installed with Node).</p>
+          <p>If you are unsure which version of npm you have, run <code>npm	-v</code> to check if you need to update.</p>
+          <p>When you run <code>npx	create-react-app	&lt;app-name&gt;</code>, <code>npx</code> is going to download the most recent create-react-app release, run it, and then remove it from your system. This is great because you will never have an outdated version
+            on your system, and every time you run it, you're getting the latest and greatest code available.</p>
+          <p>Let's start then:</p>
+          <pre><code>
+            npx	create-react-app	todolist
+          </code></pre>
+
+          <!-- img tag place -->
+
+          <p>This is when it finished running:</p>
+
+          <!-- img tag place -->
+
+          <p><code>create-react-app</code> created a files structure in the folder you told ( todolist in this case), and initialized a Git repository.</p>
+          <p>It also added a few commands in the <code>package.json</code> file, so you can immediately start the app by going into the folder and run npm start .</p>
+
+          <!-- img tag place -->
+          <!-- img tag place -->
+
+          <p>In addition to npm start , create-react-app added a few other commands:</p>
+
+          <ul>
+            <li><code>npm	run	build</code>: to build the React application files in the <b>build</b> folder, ready to be deployed to a server</li>
+            <li><code>npm	test</code>: to run the testing suite using Jest</li>
+            <li><code>npm	eject</code>: to eject from <code>create-react-app</code></li>
+          </ul>
+
+          <p>Ejecting is the act of deciding that <code>create-react-app</code> has done enough for you, but you want to do more than what it allows.</p>
+          <p>Since <code>create-react-app</code> is a set of common denominator conventions and a limited amount of options, it's probable that at some point your needs will demand something unique that outgrows the capabilities of create-react-app .</p>
+          <p>When you eject, you lose the ability of automatic updates but you gain more flexibility in the Babel and Webpack configuration.</p>
+          <p>When you eject the action is irreversible. You will get 2 new folders in your application directory, <code>config</code> and <code>scripts</code>. Those contain the configurations - and now you can start editing them.</p>
+
+        </section>
+        <section class="main-section" id="JSX">
+          <header>
+            <h2>JSX</h2>
+          </header>
+          <p>JSX is a technology that was introduced by React</p>
+          <p>Although React can work completely fine without using JSX, it's an ideal technology to work with components, so React benefits a lot from JSX.</p>
+          <p>At first, you might think that using JSX is like mixing HTML and JavaScript (and as you'll see CSS).</p>
+          <p>But this is not true, because what you are really doing when using JSX syntax is writing a declarative syntax of what a component UI should be.</p>
+          <p>And you're describing that UI not using strings, but instead using JavaScript, which allows you to do many nice things.</p>
+
+          <h3>Using JSX</h3>
+          <p>Here is how you define a <code>&lt;h1&gt;</code> tag containing a string:</p>
+          <pre><code>
+            <var>const<var>	element	=	&lt;h1&gt;Hello,	world!&lt;/h1&gt;
+          </code></pre>
+
+          <p>It looks like a strange mix of JavaScript and HTML, but in reality it's all JavaScript.</p>
+          <p>What looks like HTML, is actually syntactic sugar for defining components and their positioning inside the markup.</p>
+          <p>Inside a JSX expression, attributes can be inserted very easily:</p>
+
+          <pre><code>
+          <var>const</var> myId	=	'test'
+          <var>const</var> element	=	&lt;h1 id={myId}&gt;Hello, world!&lt;/h1&gt;
+          </code></pre>
+
+          <p>You just need to pay attention when an attribute has a dash ( - ) which is converted to camelCase syntax instead, and these 2 special cases:</p>
+
+          <ul>
+            <li><code>class</code> <b>becomes</b> <code>className</code></li>
+            <li><code>for</code> <b>becomes</b> <code>htmlFor</code></li>
+          </ul>
+
+          <p>because they are reserved words in JavaScript.</p>
+          <p>Here's a JSX snippet that wraps two components into a div tag:</p>
+
+          <pre><code>
+          &lt;div&gt;
+            &lt;BlogPostsList	/&gt;
+            &lt;Sidebar	/&gt;
+          &lt;/div&gt;
+          </code></pre>
+
+          <p>A tag always needs to be closed, because this is more XML than HTML (if you remember the XHTML days, this will be familiar, but since then the HTML5 loose syntax won). In this case a self-closing tag is used.</p>
+          <p>Notice how I wrapped the 2 components into a <code>div</code>. Why? Because <strong>the	render()	function can	only	return	a	single	node</strong>, so in case you want to return 2 siblings, just add a parent. It can be any tag, not just <code>div</code>.</p>
+
+        </section>
+        <section class="main-section" id="Components">
+          <header>
+            <h2>Components</h2>
+          </header>
+          <p>A component is one isolated piece of interface. For example in a typical blog homepage you might find the Sidebar component, and the Blog Posts List component. They are in turn composed of components themselves, so you could have a list of Blog
+            post components, each for every blog post, and each with its own peculiar properties.</p>
+          <!-- img tag place -->
+          <p>React makes it very simple: everything is a component. Even plain HTML tags are component on their own, and they are added by default.</p>
+          <p>The next 2 lines are equivalent, they do the same thing. One with JSX, one without, by injecting &lt;h1&gt;Hello World!&lt;/h1&gt; into an element with id app .</p>
+          <pre><code>
+          import	React	from	'react'
+          import	ReactDOM	from	'react-dom'
+
+          ReactDOM.render(&lt;h1&gt;Hello	World!&lt;/h1&gt;,	document.getElementById('app'))
+
+          ReactDOM.render(React.DOM.h1(null,	'Hello	World!'),		document.getElementById('app') )
+          </code></pre>
+          <p>See, React.DOM exposed us an h1 component. Which other HTML tags are available? All of them! You can inspect what React.DOM offers by typing it in the Browser Console:</p>
+          <p>There are 2 ways to define a component in React.</p>
+          <h4>A function component:</h4>
+          <pre><code>
+          <var>const</var>	BlogPostExcerpt	=	()	=>	{
+            return	(
+              &lt;div&gt;
+                &lt;h1&gt;Title&lt;/h1&gt;
+                &lt;p&gt;Description&lt;/p&gt;
+              &lt;/div&gt;
+              )
+            }
+          </code></pre>
+
+          <h4>A class component:</h4>
+          <pre><code>
+          import	React	from	'react'
+          React.createClass({
+            render() {
+              return (
+                &lt;div&gt;
+                  &lt;h1&gt;Title&lt;/h1&gt;
+                  &lt;p&gt;Description&lt;/p&gt;
+                &lt;/div&gt;
+                )
+              }
+            }
+          })
+          </code></pre>
+
+        </section>
+        <section class="main-section" id="State">
+          <header>
+            <h2>State</h2>
+          </header>
+          <p>Every interactive component has a state object and this object changes when the user interacts with the component.</p>
+          <p>To set the default state in the Component constructor, initialize <code>this.state</code>. For example the BlogPostExcerpt component might have a clicked state</p>
+
+          <pre><code>
+          class	BlogPostExcerpt	extends	Component	{
+            constructor(props)	{
+              super(props)
+              this.state	=	{	clicked:	false	}
+            }
+              render() {
+                return (
+                  &lt;div&gt;
+                    &lt;h1&gt;Title&lt;/h1&gt;
+                    &lt;p&gt;Description&lt;/p&gt;
+                  &lt;/div&gt;
+                  )
+                }
+              }
+            })
+          </code></pre>
+          <p>The clicked state can be accessed by referencing <code>this.state.clicked</code>:</p>
+          <pre><code>
+          class	BlogPostExcerpt	extends	Component	{
+            constructor(props)	{
+              super(props)
+              this.state	=	{	clicked:	false	}
+            }
+              render() {
+                return (
+                  &lt;div&gt;
+                    &lt;h1&gt;Title&lt;/h1&gt;
+                    &lt;p&gt;Description&lt;/p&gt;
+                    &lt;p&gt;Clicked:	{this.state.clicked}&lt;/p&gt;
+                  &lt;/div&gt;
+                  )
+                }
+              }
+            })
+          </code></pre>
+
+        </section>
+        <section class="main-section" id="Props">
+          <header>
+            <h2>Props</h2>
+          </header>
+          <h4>How to use props to pass data around your React components</h4>
+          <p>Props is how Components get their properties. Starting from the top component, every child component gets its props from the parent. In a function component, props is all it gets passed, and they are available by adding <code>props</code> as the
+            function argument:</p>
+          <pre><code>
+          <var>const</var> BlogPostExcerpt = props => {
+            return (
+              &lt;div&gt;
+                &lt;h1&gt;{props.title}&lt;/h1&gt;
+                &lt;p&gt;{props.description}&lt;/p&gt;
+              &lt;/div&gt;
+            )
+          }
+          </code></pre>
+          <p>In a class component, props are passed by default. There is no need to add anything special, and they are accessible as <code>this.props</code> in a Component instance.</p>
+          <pre><code>
+          import	React,	{	Component	}	from	'react'
+          class	BlogPostExcerpt	extends	Component	{
+            render()	{
+              return(
+                &lt;div&gt;
+                  &lt;h1&gt;{this.props.title}&lt;/h1&gt;
+                  &lt;p&gt;{this.props.description}&lt;/p&gt;
+                &lt;/div&gt;
+              )
+            }
+          }
+          </code></pre>
+          <p>Passing props down to child components is a great way to pass values around in your application. A component either holds data (has state) or receives data through its props.</p>
+          <p>It get complicated when:</p>
+          <ul>
+            <li>you need to access the state of a component from a child that's several levels down (all the previous children need to act as a pass-through, even if they do not need to know the state, complicating things)</li>
+            <li>you need to access the state of a component from a completely unrelated component.</li>
+          </ul>
+
+        </section>
+        <section class="main-section" id="Lifecycle_Events">
+          <header>
+            <h2>Lifecycle Events</h2>
+          </header>
+          <p>React class components can have hooks for several lifecycle events.</p>
+          <blockquote>
+            <p>Hooks allow function components to access them too, in a different way.</p>
+          </blockquote>
+          <p>During the lifetime of a component, there's a series of events that gets called, and to each event you can hook and provide custom functionality.</p>
+          <p>What hook is best for what functionality is something we're going to see here.</p>
+          <p>First, there are 3 phases in a React component lifecycle:</p>
+          <ul>
+            <li>Mounting</li>
+            <li>Updating</li>
+            <li>Unmounting</li>
+          </ul>
+          <h4>Mounting</h4>
+          <p>When mounting you have 4 lifecycle methods before the component is mounted in the DOM: the <code>constructor</code>, <code>getDerivedStateFromProps</code> , <code>render</code> and <code>componentDidMount</code></p>
+          <h5>Constructor</h5>
+          <p>The constructor is the first method that is called when mounting a component.</p>
+          <p>You usually use the constructor to set up the initial state using this.state = ... .</p>
+          <h5>getDerivedStateFromProps</h5>
+          <p>When the state depends on props, getDerivedStateFromProps can be used to update the state based on the props value.</p>
+          <h5>render</h5>
+          <p>From the render() method you return the JSX that builds the component interface.</p>
+          <p>It's a pure method, so it should not cause side effects and should return the same output when called multiple times with the same input.</p>
+          <h5>componentDidMount</h5>
+          <p>This method is the one that you will use to perform API calls, or process operations on the DOM.</p>
+          <h4>Updating</h4>
+          <p>When updating you have 5 lifecycle methods before the component is mounted in the DOM: the <code>getDerivedStateFromProps</code>, <code>shouldComponentUpdate</code>, <code>render</code>, <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>.</p>
+          <h5>getDerivedStateFromProps</h5>
+          <p>See the above description for this method.</p>
+          <h5>shouldComponentUpdate</h5>
+          <p>This method returns a boolean, <code>true</code> or <code>false</code>. You use this method to tell React if it should go on with the rerendering, and defaults to true . You will return false when rerendering is expensive and you want to have more
+            control on when this happens.</p>
+          <h5>render</h5>
+          <p>See the above description for this method.</p>
+          <h5>getSnapshotBeforeUpdate</h5>
+          <p>In this method you have access to the props and state of the previous render, and of the current render.</p>
+          <p>Its use cases are very niche, and it's probably the one that you will use less.</p>
+          <h5>componentDidUpdate</h5>
+          <p>This method is called when the component has been updated in the DOM. Use this to run any 3rd party DOM API or call APIs that must be updated when the DOM changes.</p>
+          <p>It corresponds to the componentDidMount() method from the mounting phase.</p>
+          <h4>Unmounting</h4>
+          <p>In this phase we only have one method, <code>componentWillUnmount</code>.</p>
+          <h5>componentWillUnmount()</h5>
+          <p>The method is called when the component is removed from the DOM. Use this to do any sort of cleanup you need to perform.</p>
+        </section>
+        <section class="main-section" id="Handling_Forms">
+          <header>
+            <h2>Handling Forms</h2>
+          </header>
+          <p>Forms are one of the few HTML elements that are interactive by default.</p>
+          <p>They were designed to allow the user to interact with a page.</p>
+          <p>Common uses of forms</p>
+          <ul>
+            <li>Search </li>
+            <li>Contact forms</li>
+            <li>Shopping carts checkout</li>
+            <li>Login and registration</li>
+            <li>and more!</li>
+          </ul>
+          <p>There are two main ways of handling forms in React, which differ on a fundamental level: how data is managed</p>
+          <ul>
+            <li>if the data is handled by the DOM, we call them uncontrolled components</li>
+            <li>if the data is handled by the components we call them controlled components</li>
+          </ul>
+          <p>As you can imagine, controlled components is what you will use most of the time. The component state is the single source of truth, rather than the DOM. Some form fields are inherently uncontrolled because of their behavior, like the <code>&lt;input	type="file"&gt;</code>        field</p>
+          <p>When an element state changes in a form field managed by a component, we track it using the <code>onChange</code> attribute.</p>
+          <pre><code>
+          class	Form	extends	React.Component	{
+            constructor(props)	{
+              super(props)
+              this.state	=	{	username:	''	}
+            }
+
+            handleChange(event)	{}
+
+            render()	{
+              return(
+                &lt;Form&gt;
+                    Username:
+                  &lt;input
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  /&gt;
+                &lt;/Form&gt;
+              )
+            }
+          }
+          </code></pre>
+          <p>In order to set the new state, we must bind <code>this</code> to the <code>handleChange</code> method, otherwise <code>this</code> is not accessible from within that method:</p>
+          <pre><code>
+          class	Form	extends	React.Component	{
+            constructor(props)	{
+              super(props)
+              this.state	=	{	username:	''	}
+              this.handleChange	=	this.handleChange.bind(this)
+            }
+
+            handleChange(event)	{
+              this.setState({	value:	event.target.value	})
+            }
+
+            render()	{
+              return(
+                &lt;Form&gt;
+                    Username:
+                  &lt;input
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  /&gt;
+                &lt;/Form&gt;
+              )
+            }
+          }
+        </pre>
+          </code>
+          <p>Similarly, we use the <code>onSubmit</code> attribute on the form to call the <code>handleSubmit</code> method when the form is submitted:</p>
+          <pre><code>
+          class	Form	extends	React.Component	{
+            constructor(props)	{
+              super(props)
+              this.state	=	{	username:	''	}
+              this.handleChange	=	this.handleChange.bind(this)
+              this.handleSubmit	=	this.handleSubmit.bind(this)
+            }
+
+            handleChange(event)	{
+              this.setState({	value:	event.target.value	})
+            }
+
+            handleSubmit(event)	{
+              alert(this.state.username)
+              event.preventDefault()
+            }
+
+            render()	{
+              return(
+                &lt;Form&gt;
+                    Username:
+                  &lt;input
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  /&gt;
+                  &lt;input	type="submit"	value="Submit"	/&gt;
+                &lt;/Form&gt;
+              )
+            }
+          }
+          </code></pre>
+          <p>Validation in a form can be handled in the handleChange method: you have access to the old value of the state, and the new one. You can check the new value and if not valid reject the updated value (and communicate it in some way to the user).</p>
+
+        </section>
+      </main>
+
+    </div>
+  </body>
+</html>
